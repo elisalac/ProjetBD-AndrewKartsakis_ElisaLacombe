@@ -47,9 +47,30 @@
                     </select>
 
                     <div id="copy">
-                        <input type="hidden" name="inputCount" value="<?php echo $inputCount; ?>">
+                        <?php
+                        // Initialize input count
+                        $inputCount = 1;
+
+                        // Check if the "Add input" button is clicked
+                        if (isset($_POST['addInput'])) {
+                            // Retrieve existing input count if any
+                            $inputCount = isset($_POST['inputCount']) ? $_POST['inputCount'] : 1;
+                            // Increment input count
+                            $inputCount++;
+                        }
+
+                        // Generate input fields based on count
+                        for ($i = 1; $i <= $inputCount; $i++) {
+                            echo '<input type="text" placeholder="Copy ' . $i . '" />';
+                        }
+                        ?>
+                        <!-- Submit the form to the current page -->
                         <button type="submit" name="addInput" id="addInput">Add input</button>
+                        <!-- Store input count to pass it to the server on form submission -->
+                        <input type="hidden" name="inputCount" value="<?php echo $inputCount; ?>">
                     </div>
+
+
 
                     <fieldset id="detailsFieldset">
                         <legend>Details</legend>
@@ -63,20 +84,5 @@
         </fieldset>
     </div>
 </body>
-<?php
-if (isset($_POST['addInput'])) {
-    // Retrieve existing input count if any
-    $inputCount = isset($_POST['inputCount']) ? $_POST['inputCount'] : 1;
-    // Increment input count
-    $inputCount++;
-} else {
-    // If the button hasn't been clicked yet, set default count
-    $inputCount = 1;
-}
-// Generate input fields based on count
-for ($i = 1; $i <= $inputCount; $i++) {
-    echo '<input type="text" placeholder="Copy ' . $i . '" />';
-}
-?>
 
 </html>
