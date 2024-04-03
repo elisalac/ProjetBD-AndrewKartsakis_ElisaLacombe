@@ -32,6 +32,11 @@
         #typeContainer {
             width: 200px;
         }
+
+        input[type=text],
+        button {
+            margin-left: 10px;
+        }
     </style>
 </head>
 
@@ -81,7 +86,6 @@
 
             copyDiv.insertBefore(newInput, copyDiv.querySelector('button'));
 
-            // Update input count
             document.querySelector('input[name="inputCount"]').value = inputCount;
         });
     </script>
