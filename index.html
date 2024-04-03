@@ -3,23 +3,76 @@
 
 <head>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
         #inputContainer {
             float: right;
         }
 
         #formContainer {
             margin-bottom: 15px;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         table,
         td,
         th {
-            border: 1px solid;
+            border: 1px solid #ddd;
+            padding: 8px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .add-document-button {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-document-button:hover {
+            background-color: #0056b3;
+        }
+
+        input[type=text],
+        select,
+        input[type=submit] {
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -30,7 +83,7 @@
             <form>
                 <div id="inputContainer">
                     <!-- <input type="submit" value="Add a document" /> -->
-                    <a href="newDocument.html"><button>Add a document</button></a>
+                    <a href="newDocument.html" class="add-document-button">Add a document</a>
                     <select>
                         <option>None</option>
                         <option value="asc">Order by title (asc)</option>

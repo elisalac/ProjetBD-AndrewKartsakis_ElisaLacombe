@@ -3,38 +3,107 @@
 
 <head>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
         #formContainer {
-            margin-top: 100px;
+            margin-top: 50px;
+            text-align: center;
         }
 
         #form {
             width: 800px;
             margin: auto;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         input[type=text],
         select,
         #detailsFieldset,
         #typeContainer,
-        button {
+        button,
+        input[type=submit] {
             margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
         }
 
         input[type=submit] {
-            position: relative;
-            left: 700px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
         }
 
-        select {
-            width: 100px;
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        legend {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
 
         #typeContainer {
-            width: 200px;
+            width: auto;
+        }
+
+        #typeContainer legend {
+            margin-bottom: 0;
+        }
+
+        #typeContainer label {
+            margin-right: 10px;
+        }
+
+        #copy {
+            margin-bottom: 20px;
         }
 
         input[type=text] {
             margin-right: 10px;
+        }
+
+        #goBack {
+            float: right;
+            margin: 20px;
+            padding: 8px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        #goBack:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -46,13 +115,11 @@
             <form id="documentForm">
                 <div id="inputContainer">
                     <!-- Id and availability will be generated automatically -->
-                    <input type="text" min="1" placeholder="Title" /> <br>
+                    <input type="text" min="1" placeholder="Title" id="title" /> <br>
                     <fieldset id="typeContainer">
                         <legend>Type</legend>
-                        <label for="book">Book</label>
-                        <input type="radio" name="book" value="Book">
-                        <label for="periodic">Periodique</label>
-                        <input type="radio" name="periodic" value="Periodique">
+                        <input type="radio" name="book" value="Book"> Book
+                        <input type="radio" name="periodic" value="Periodic"> Periodic
                     </fieldset>
 
                     <div id="copy">
@@ -66,13 +133,23 @@
                         <input type="text" min="1" placeholder="Year" /> <br>
                         <input type="text" min="1" placeholder="Edition" /> <br>
                     </fieldset>
-                    <input type="submit" value="Add document" />
+                    <input type="submit" id="addDocumentButton" value="Add document" />
                 </div>
             </form>
         </fieldset>
     </div>
-
+    <button id="goBack">Return to list</button>
     <script>
+        document.getElementById('documentForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            window.location.href = 'index.html';
+        });
+
+        document.getElementById('goBack').onclick = function (event) {
+            event.preventDefault();
+            window.location.href = 'index.html';
+        };
+
         document.getElementById('addInput').addEventListener('click', function () {
             var inputCount = parseInt(document.querySelector('input[name="inputCount"]').value);
             inputCount++;
