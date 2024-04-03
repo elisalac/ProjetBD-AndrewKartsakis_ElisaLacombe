@@ -7,14 +7,16 @@
             margin-top: 100px;
         }
 
-        fieldset {
+        #form {
             width: 800px;
             margin: auto;
         }
 
         input[type=text],
         select,
-        #detailsFieldset {
+        #detailsFieldset,
+        #typeContainer,
+        button {
             margin-bottom: 10px;
         }
 
@@ -23,54 +25,34 @@
             left: 700px;
         }
 
-        label {
-            margin-right: 41px;
-        }
-
         select {
             width: 100px;
+        }
+
+        #typeContainer {
+            width: 200px;
         }
     </style>
 </head>
 
 <body>
     <div id="formContainer">
-        <fieldset>
+        <fieldset id="form">
             <legend>Add a document</legend>
-            <form>
+            <form id="documentForm">
                 <div id="inputContainer">
                     <!-- Id and availability will be generated automatically -->
                     <input type="text" min="1" placeholder="Title" /> <br>
-                    <label name="typeDocument">Type</label>
-                    <select name="typeDocument">
-                        <!-- options will be generated -->
-                    </select>
+                    <fieldset id="typeContainer">
+                        <legend>Type</legend>
+                        <input type="radio" name="typeDocument" value="Book"> Book
+                        <input type="radio" name="typeDocument" value="Périodique"> Periodic
+                    </fieldset>
 
                     <div id="copy">
-                        <?php
-                        // Initialize input count
-                        $inputCount = 1;
-
-                        // Check if the "Add input" button is clicked
-                        if (isset($_POST['addInput'])) {
-                            // Retrieve existing input count if any
-                            $inputCount = isset($_POST['inputCount']) ? $_POST['inputCount'] : 1;
-                            // Increment input count
-                            $inputCount++;
-                        }
-
-                        // Generate input fields based on count
-                        for ($i = 1; $i <= $inputCount; $i++) {
-                            echo '<input type="text" placeholder="Copy ' . $i . '" />';
-                        }
-                        ?>
-                        <!-- Submit the form to the current page -->
-                        <button type="submit" name="addInput" id="addInput">Add input</button>
-                        <!-- Store input count to pass it to the server on form submission -->
-                        <input type="hidden" name="inputCount" value="<?php echo $inputCount; ?>">
+                        <input type="hidden" name="inputCount" value="0">
+                        <button type="button" id="addInput">Add input</button>
                     </div>
-
-
 
                     <fieldset id="detailsFieldset">
                         <legend>Details</legend>
@@ -83,6 +65,26 @@
             </form>
         </fieldset>
     </div>
+
+    <script>
+        document.getElementById('addInput').addEventListener('click', function () {
+            var inputCount = parseInt(document.querySelector('input[name="inputCount"]').value);
+            inputCount++;
+            var copyDiv = document.getElementById('copy');
+
+            var newInput = document.createElement('input');
+            newInput.type = 'text';
+            newInput.placeholder = 'Copy ' + inputCount;
+            newInput.name = 'additionalInput' + inputCount;
+            newInput.min = '1';
+            newInput.style.marginBottom = '10px';
+
+            copyDiv.insertBefore(newInput, copyDiv.querySelector('button'));
+
+            // Update input count
+            document.querySelector('input[name="inputCount"]').value = inputCount;
+        });
+    </script>
 </body>
 
 </html>
