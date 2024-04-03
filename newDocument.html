@@ -33,9 +33,8 @@
             width: 200px;
         }
 
-        input[type=text],
-        button {
-            margin-left: 10px;
+        input[type=text] {
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -50,8 +49,10 @@
                     <input type="text" min="1" placeholder="Title" /> <br>
                     <fieldset id="typeContainer">
                         <legend>Type</legend>
-                        <input type="radio" name="typeDocument" value="Book"> Book
-                        <input type="radio" name="typeDocument" value="Périodique"> Periodic
+                        <label for="book">Book</label>
+                        <input type="radio" name="book" value="Book">
+                        <label for="periodic">Periodique</label>
+                        <input type="radio" name="periodic" value="Periodique">
                     </fieldset>
 
                     <div id="copy">
