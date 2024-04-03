@@ -105,6 +105,11 @@
         #goBack:hover {
             background-color: #0056b3;
         }
+
+        #deleteInput {
+            background-color: #dc3545;
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -124,7 +129,8 @@
 
                     <div id="copy">
                         <input type="hidden" name="inputCount" value="0">
-                        <button type="button" id="addInput">Add input</button>
+                        <button type="button" id="addInput">Add copy</button>
+                        <button type="button" id="deleteInput">Delete last copy</button> <!-- New button added -->
                     </div>
 
                     <fieldset id="detailsFieldset">
@@ -165,6 +171,19 @@
             copyDiv.insertBefore(newInput, copyDiv.querySelector('button'));
 
             document.querySelector('input[name="inputCount"]').value = inputCount;
+        });
+
+        document.getElementById('deleteInput').addEventListener('click', function () {
+            var copyDiv = document.getElementById('copy');
+            var lastInput = copyDiv.querySelector('input[type="text"]:last-of-type');
+            if (lastInput) {
+                lastInput.remove();
+                var inputCount = parseInt(document.querySelector('input[name="inputCount"]').value);
+                if (inputCount > 0) {
+                    inputCount--;
+                    document.querySelector('input[name="inputCount"]').value = inputCount;
+                }
+            }
         });
     </script>
 </body>
